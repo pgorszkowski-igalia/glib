@@ -2969,7 +2969,7 @@ g_signal_handlers_block_matched (gpointer         instance,
   g_return_val_if_fail (G_TYPE_CHECK_INSTANCE (instance), 0);
   g_return_val_if_fail ((mask & ~G_SIGNAL_MATCH_MASK) == 0, 0);
   
-  if (mask & (G_SIGNAL_MATCH_CLOSURE | G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA))
+  if (mask & (G_SIGNAL_MATCH_ID | G_SIGNAL_MATCH_CLOSURE | G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA))
     {
       SIGNAL_LOCK ();
       n_handlers =
@@ -2996,8 +2996,9 @@ g_signal_handlers_block_matched (gpointer         instance,
  * Unblocks all handlers on an instance that match a certain selection
  * criteria. The criteria mask is passed as an OR-ed combination of
  * #GSignalMatchType flags, and the criteria values are passed as arguments.
- * Passing at least one of the %G_SIGNAL_MATCH_CLOSURE, %G_SIGNAL_MATCH_FUNC
- * or %G_SIGNAL_MATCH_DATA match flags is required for successful matches.
+ * Passing at least one of the %G_SIGNAL_MATCH_ID, %G_SIGNAL_MATCH_CLOSURE,
+ * %G_SIGNAL_MATCH_FUNC or %G_SIGNAL_MATCH_DATA match flags is required for
+ * successful matches.
  * If no handlers were found, 0 is returned, the number of unblocked handlers
  * otherwise. The match criteria should not apply to any handlers that are
  * not currently blocked.
@@ -3018,7 +3019,7 @@ g_signal_handlers_unblock_matched (gpointer         instance,
   g_return_val_if_fail (G_TYPE_CHECK_INSTANCE (instance), 0);
   g_return_val_if_fail ((mask & ~G_SIGNAL_MATCH_MASK) == 0, 0);
   
-  if (mask & (G_SIGNAL_MATCH_CLOSURE | G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA))
+  if (mask & (G_SIGNAL_MATCH_ID | G_SIGNAL_MATCH_CLOSURE | G_SIGNAL_MATCH_FUNC | G_SIGNAL_MATCH_DATA))
     {
       SIGNAL_LOCK ();
       n_handlers =
